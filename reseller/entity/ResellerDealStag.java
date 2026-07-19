@@ -1,0 +1,20 @@
+package com.sharkdom.reseller.entity;
+
+public enum ResellerDealStag {
+    APPROVED,
+    WAITING_FOR_APPROVAL,
+    REJECTED,
+    CLOSED,
+    EXPIRED,
+    IN_PIPELINE,
+    ACTIVE,
+    FULL_FILLED,
+    REQUESTED,
+    APPOINTMENT_SCHEDULED,
+    QUALIFIED_TO_BUY,
+    PRESENTATION_SCHEDULED,
+    DECISION_MAKER_BOUGHT_IN,
+    CONTRACT_SENT,
+    CLOSED_WON,
+    CLOSED_LOST
+}
