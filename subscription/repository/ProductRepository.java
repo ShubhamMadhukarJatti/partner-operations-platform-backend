@@ -1,0 +1,18 @@
+package com.sharkdom.subscription.repository;
+
+import com.sharkdom.subscription.entity.ModuleName;
+import com.sharkdom.subscription.entity.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ProductRepository extends JpaRepository<Product, Long> {
+
+    Optional<Product> findByProductId(String productId);
+
+    List<Product> findByProductIdIn(List<String> productIds);
+
+    List<Product> findByProductNameIn(List<ModuleName> moduleNames);
+
+}
