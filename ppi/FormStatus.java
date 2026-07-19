@@ -1,6 +1,8 @@
-package com.sharkdom.entity.ppi;
+package com.sharkdom.constants.ppi;
 
 public enum FormStatus {
-    APPROVED,
-    DENIED
+    NOT_ASSIGNED,
+    ASSIGNED,
+    REJECTED,
+    REVIEWED
 }

@@ -1,0 +1,17 @@
+package com.sharkdom.constants.organization;
+
+public enum OrgUserRole {
+    ADMIN,
+    VIEWER,
+    PM,
+    PARTNER_ACCOUNT_MANAGER,
+    PARTNERSHIP_LEAD,
+    ACCOUNT_EXECUTIVE,
+    SALES_REP,
+    LEGAL_COMPLIANCE_REVIEWER,
+    MARKETING_ENABLEMENT_MANAGER,
+    EXTERNAL_PARTNER_ROLE_LITE,
+    PARTNER_OPS_ANALYST,
+    PARTNER_PORTAL_USER,
+    USER
+}
