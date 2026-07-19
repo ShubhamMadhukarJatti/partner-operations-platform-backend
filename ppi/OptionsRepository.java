@@ -1,0 +1,9 @@
+package com.sharkdom.repository.ppi;
+
+import com.sharkdom.entity.ppi.Options;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface OptionsRepository extends JpaRepository<Options,Long> {
+}
