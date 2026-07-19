@@ -1,0 +1,80 @@
+#name: Azure WebApp Deployment
+#
+#on:
+#  push:
+#    branches: [ main ]  # Replace with your branch name if different
+#  workflow_dispatch:  # Allows manual triggering
+#
+#permissions:
+#  id-token: write
+#  contents: read
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - name: Set up Java
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: 'temurin'
+#          java-version: '21'
+#          cache: 'maven'
+#
+#      - name: Build with Maven
+#        run: mvn clean package
+#
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: app-package
+#          path: target/*.jar  # Adjust if your package produces a different artifact
+#
+#  deploy-to-dev:
+#    needs: build
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: app-package
+#
+#      - name: Login to Azure
+#        uses: azure/login@v2
+#        with:
+#          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0D88ABDDE5A64389BF1267326F4004C1 }}
+#          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_56E59C6483664E33A99136815214FFB1 }}
+#          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A4EC346D5E174482AFA0E683F23E69DE }}
+#
+#      - name: Deploy to Azure WebApp (DEV)
+#        run: mvn azure-webapp:deploy
+#        env:
+#          RESOURCE_GROUP: ${{ secrets.DEV_RESOURCE_GROUP }}
+#          WEBAPP_NAME: ${{ secrets.DEV_WEBAPP_NAME }}
+#          REGION: ${{ secrets.AZURE_REGION }}
+#
+#  deploy-to-prod:
+#    needs: deploy-to-dev
+#    runs-on: ubuntu-latest
+#    environment: production  # This enables manual approval
+#
+#    steps:
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: app-package
+#
+#      - name: Login to Azure
+#        uses: azure/login@v2
+#        with:
+#          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_82583BB4248C4210B0C80D5B6145447F }}
+#          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_2CF4255A78054EB7B2B06606023D0CC3 }}
+#          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_BA250BEBDCC24701816A24053A97970F }}
+#
+#      - name: Deploy to Azure WebApp (PROD)
+#        run: mvn azure-webapp:deploy
+#        env:
+#          RESOURCE_GROUP: ${{ secrets.PROD_RESOURCE_GROUP }}
+#          WEBAPP_NAME: ${{ secrets.PROD_WEBAPP_NAME }}
+#          REGION: ${{ secrets.AZURE_REGION }}
